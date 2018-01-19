@@ -4,18 +4,19 @@
         <style type="text/css">
         .navbar__tab {
             width: auto;
-            height: 65px;
-            line-height: 65px;
+            height: 60px;
+            line-height: 60px;
             float: left;
-            padding: 0px 20px;
-            font-family: helvetica;
+            padding: 0px 32px;
+            font-family: monospace;
             color: #4d4d4d;
             cursor: pointer;
+            font-size: 20px;
         }
 
         .navbar__tab img{
-            width: 80px;
-            margin-top: 5px;
+            width: 100px;
+            margin-top: 4px;
         }
 
         body{
@@ -25,12 +26,14 @@
             background-size: 100%;
         }
 
-        .navbar__tab:hover {
+        .navbar__tab:not(:first-child):hover {
             background-color: rgba(18, 136, 155, 1);
+            color: white;
         }
 
-        .navbar__tab:not(:last-child) {
-            border-right: 1px solid white;
+        /* .navbar__tab:not(:last-child) { */
+        .navbar__tab{
+            border-right: 1px solid rgb(18, 136, 155);
         }
 
         .navbar__tab.navbar__tab--logo {
@@ -39,7 +42,7 @@
 
         .navbar__container {
             width: 100%;
-            height: 65px;
+            height: 60px;
             margin-bottom: 40px;
             /* padding-bottom: 10px; */
             background-color: #e4e4e4;
@@ -87,6 +90,32 @@
             box-shadow: 1px 1px 1px 1px #e4e4e4;
         }
 
+        .search__container__child.search__description {
+            width: 800px;
+            margin: 0 auto;
+            margin-top: 200px;
+        }
+
+        .search__description--etc {
+            color: white;
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: monospace;
+            font-size: 18px;
+            margin-top: 10px;
+            color: rgb(18, 136, 155);
+        }
+
+        .search__description--text {
+            color: white;
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: monospace;
+            font-size: 18px;
+        }
+
         </style>
     </head>
     <body>
@@ -125,7 +154,7 @@
                     We will be launching search soon.
                 </div>
                 <div class = "search__description--etc">
-                    etc. information.
+                    Stay tuned.
                 </div>
             </div>
         </div>
