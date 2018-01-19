@@ -2,7 +2,36 @@
 <html lang="en">
     <head>
         <style type="text/css">
+        .navbar__tab {
+            width: auto;
+            height: 65px;
+            line-height: 65px;
+            float: left;
+            padding: 0px 20px;
+            font-family: helvetica;
+            color: #4d4d4d;
+            cursor: pointer;
+        }
 
+        .navbar__tab:hover {
+            background-color: rgba(18, 136, 155, 1);
+        }
+
+        .navbar__tab:not(:last-child) {
+            border-right: 1px solid white;
+        }
+
+        .navbar__tab.navbar__tab--logo {
+            padding: 0px;
+        }
+
+        .navbar__container {
+            width: 100%;
+            height: 52px;
+            margin-bottom: 40px;
+            /* padding-bottom: 10px; */
+            background-color: #e4e4e4;
+        }
         </style>
     </head>
     <body>
