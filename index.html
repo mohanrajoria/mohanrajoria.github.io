@@ -79,7 +79,12 @@
         <script type="text/javascript">
             // const urlRegex = new RegExp("^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
             
-            // document.addEventListener("click", copyToClipboard);
+            document.onClick(function(e) {
+                if (e.target.className === 'copyLink') {
+                    console.log(e);
+                }
+            });
+            
             function onClickCopy(e) {
                 console.log(e);
                 const str = e.target.getAttribute('data-url');
