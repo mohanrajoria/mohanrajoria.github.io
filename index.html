@@ -77,10 +77,11 @@
             // const urlRegex = new RegExp("^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
             
             // document.addEventListener("click", copyToClipboard);
-            // function onClickCopy(e) {
-            //     const str = e.target.getAttribute('data-url');
-            //     copyToClipboard(str);
-            // }
+            function onClickCopy(e) {
+                console.log(e);
+                const str = e.target.getAttribute('data-url');
+                copyToClipboard(str);
+            }
 
             function onClick() {
                 const url = document.getElementById('url').value;
@@ -125,9 +126,6 @@
                     x = xmlDoc.getElementsByTagName("loc");
                     for (i = 0; i < x.length; i++) {
                         const pageUrl = x[i].childNodes[0].nodeValue;
-                        const onClickCopy = function() {
-                            copyToClipboard(pageUrl);
-                        }
                         parsedContent += "<div class='link'><span class='copyLink' onclick='onClickCopy()' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' >" + pageUrl + "</a></div>";
                     }
                     document.getElementById("content").innerHTML = parsedContent;
