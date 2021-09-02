@@ -108,7 +108,7 @@
             function onClick() {
                 const url = document.getElementById('url').value;
                 setContent("Processing...");
-                let isValidUrl = true;
+                let isValidUrl = url && url.trim();
                 // let isValidUrl = urlRegex.match(url);
                 if (isValidUrl) {
                     loadXMLDoc(url);
