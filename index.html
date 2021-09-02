@@ -1,161 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <style type="text/css">
-        .navbar__tab {
-            width: auto;
-            height: 60px;
-            line-height: 60px;
-            float: left;
-            padding: 0px 32px;
-            font-family: monospace;
-            color: #4d4d4d;
-            cursor: pointer;
-            font-size: 20px;
+<html>
+  <body>
+    <h2>Sitemap linkifier</h2>
+    <input id="url" name="url" value="" placeholder="Enter url" />
+    <button type="button" onclick="onClick()">Linkify</button>
+    <div id="content" />
+    <script type="text/javascript">
+      // const urlRegex = new RegExp("^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
+      function onClick() {
+        const url = document.getElementById('url').value;
+        document.getElementById("content").innerHTML = "Processing...";
+        let isValidUrl = true;
+        // let isValidUrl = urlRegex.match(url);
+        if (isValidUrl) {
+          loadXMLDoc(url);
+        } else {
+          document.getElementById("content").innerHTML = "Invalid url.";
         }
+      }
 
-        .navbar__tab img{
-            width: 100px;
-            margin-top: 4px;
+      function loadXMLDoc(xmlUrl) {
+        const url = document.getElementById();
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            myFunction(this);
+          }
+        };
+        xmlhttp.open("GET", xmlUrl, true);
+        xmlhttp.send();
+      }
+
+      function myFunction(xml) {
+        var x, i, xmlDoc;
+        xmlDoc = xml.responseXML;
+        let parsedContent = "";
+        x = xmlDoc.getElementsByTagName("loc");
+        for (i = 0; i < x.length; i++) {
+          const pageUrl = x[i].childNodes[0].nodeValue;
+          parsedContent += "<a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "<br>";
         }
-
-        body{
-            margin: 0px;
-            background-image: url("./images/background.jpg");
-            background-repeat: no-repeat, repeat;
-            background-size: 100%;
-        }
-
-        .navbar__tab:not(:first-child):hover {
-            background-color: rgba(18, 136, 155, 1);
-            color: white;
-        }
-
-        /* .navbar__tab:not(:last-child) { */
-        .navbar__tab{
-            border-right: 1px solid rgb(18, 136, 155);
-        }
-
-        .navbar__tab.navbar__tab--logo {
-            padding: 0px;
-        }
-
-        .navbar__container {
-            width: 100%;
-            height: 60px;
-            margin-bottom: 40px;
-            /* padding-bottom: 10px; */
-            background-color: #e4e4e4;
-        }
-        .search__icon--bar{
-            position: relative;
-            top: 100px;
-            width: 700px;
-            margin: 0 auto;
-            height: 80px;
-            border-radius: 100px;
-            box-shadow: 1px 1px 1px 1px #4d4d4d;
-            background-color: #e4e4e4;
-        }
-
-        .search__icon--bar__text {
-            margin-top: 15px;
-            float: left;
-            margin-left: 50px;
-            font-size: 40px;
-            font-family: monospace;
-            color: #4d4d4d;
-            /* color: #e4e4e4; */
-        }
-
-        .search__icon--bar__btn {
-            float: right;
-            margin-top: 20px;
-            float: right;
-            font-size: 30px;
-            font-family: helvetica;
-            /* color: #e4e4e4; */
-            color: white;
-            padding: 10px 26px;
-            background-color: #5b6961;
-            border-radius: 100px;
-            font-size: 20px;
-            background-color: rgba(18, 136, 155, 1);
-            margin-right: 15px;
-            box-shadow: 1px 1px 1px 1px #e4e4e4;
-            cursor: pointer;
-        }
-
-        .search__container__child.search__description {
-            width: 800px;
-            margin: 0 auto;
-            margin-top: 330px;
-        }
-
-        .search__description--etc {
-            color: white;
-            width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            font-family: monospace;
-            font-size: 18px;
-            margin-top: 10px;
-            color: rgb(18, 136, 155);
-        }
-
-        .search__description--text {
-            color: white;
-            width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            font-family: monospace;
-            font-size: 18px;
-            color: rgb(18, 136, 155);
-        }
-
-        </style>
-    </head>
-    <body>
-        <div class = "navbar__container__parent">
-            <div class = "navbar__container">
-                <div class = "navbar__tab navbar__tab--logo">
-                    <img src = "./images/search-icon.png">
-                </div>
-                <div class = "navbar__tab navbar__tab--home">
-                    Home
-                </div>
-                <div class = "navbar__tab navbar__tab-community">
-                    Community
-                </div>
-                <div class = "navbar__tab navbar__tab--docs">
-                    Documenation
-                </div>
-            </div>
-        </div>
-
-        <div class = "search__container">
-            <div class="search__container__child search__icon">
-                <div class="search__icon--bar">
-                    <div class = "search__icon--bar__text">
-                        |Search
-                    </div>
-                    <div class = "search__icon--bar__btn">
-                        Coming soon
-                    </div>
-                </div>
-            </div>
-            <div class = "search__container__child search__description">
-                <div class = "search__description--text">
-                    We will be launching search soon.
-                </div>
-                <div class = "search__description--etc">
-                    Stay tuned.
-                </div>
-            </div>
-        </div>
-
-        <script type="text/javascript">
-
-        </script>
-    </body>
+        document.getElementById("content").innerHTML = parsedContent;
+      }
+    </script>
+  </body>
 </html>
+
