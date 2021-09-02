@@ -92,6 +92,12 @@
                     }, 3000);
                 }
             })
+
+            document.getElementById('url').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    onClick();
+                }
+            });
             
             function setContent(content) {
                 const contentElement = document.getElementById("content");
