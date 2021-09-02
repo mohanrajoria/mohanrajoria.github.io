@@ -79,18 +79,18 @@
         <script type="text/javascript">
             // const urlRegex = new RegExp("^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
             
-            document.onClick(function(e) {
-                if (e.target.className === 'copyLink') {
-                    console.log(e);
+            document.addEventListener('click', function(e) {
+                const targetElement = e.target;
+                if (targetElement.classList[0] === 'copyLink') {
+                    copyToClipboard(e.target.getAttribute('data-url'));
+                    e.preventDefault();
+                    targetElement.innerHTML = '&#9989;';
+                    setTimeout(function() {
+                        targetElement.innerHTML = '&#128279;';
+                    }, 3000);
                 }
-            });
+            })
             
-            function onClickCopy(e) {
-                console.log(e);
-                const str = e.target.getAttribute('data-url');
-                copyToClipboard(str);
-            }
-
             function setContent(content) {
                 const contentElement = document.getElementById("content");
                 contentElement.innerHTML = content;
@@ -140,7 +140,7 @@
                     x = xmlDoc.getElementsByTagName("loc");
                     for (i = 0; i < x.length; i++) {
                         const pageUrl = x[i].childNodes[0].nodeValue;
-                        parsedContent += "<div class='link'><span class='copyLink' onclick='onClickCopy()' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' >" + pageUrl + "</a></div>";
+                        parsedContent += "<div class='link'><span class='copyLink' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' >" + pageUrl + "</a></div>";
                     }
                     setContent(parsedContent);
                 } else {
