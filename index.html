@@ -114,13 +114,16 @@
             function myFunction(xml) {
                 var x, i, xmlDoc;
                 xmlDoc = xml.responseXML;
-                let parsedContent = "";
-                x = xmlDoc.getElementsByTagName("loc");
-                for (i = 0; i < x.length; i++) {
-                    const pageUrl = x[i].childNodes[0].nodeValue;
-                    parsedContent += "<div class='link'><span class='copyLink' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "<br>";
+                if (xmlDoc) {
+                    let parsedContent = "";
+                    x = xmlDoc.getElementsByTagName("loc");
+                    for (i = 0; i < x.length; i++) {
+                        const pageUrl = x[i].childNodes[0].nodeValue;
+                        parsedContent += "<div class='link'><span class='copyLink' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "<br>";
+                    }
+                    document.getElementById("content").innerHTML = parsedContent;
                 }
-                document.getElementById("content").innerHTML = parsedContent;
+                document.getElementById("content").innerHTML = "Error processing file.";
             }
         </script>
     </body>
