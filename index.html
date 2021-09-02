@@ -63,6 +63,7 @@
                 margin: 0 auto;
                 overflow: scroll;
                 background: white;
+                visibility: hidden;
             }
         </style>
     </head>
@@ -83,15 +84,21 @@
                 copyToClipboard(str);
             }
 
+            function setContent(content) {
+                const contentElement = document.getElementById("content");
+                contentElement.innerHTML = content;
+                contentElement.style.visibility = 'visible';
+            }
+
             function onClick() {
                 const url = document.getElementById('url').value;
-                document.getElementById("content").innerHTML = "Processing...";
+                setContent("Processing...");
                 let isValidUrl = true;
                 // let isValidUrl = urlRegex.match(url);
                 if (isValidUrl) {
                     loadXMLDoc(url);
                 } else {
-                    document.getElementById("content").innerHTML = "Invalid url.";
+                    setContent("Invalid url.");
                 }
             }
 
@@ -128,9 +135,9 @@
                         const pageUrl = x[i].childNodes[0].nodeValue;
                         parsedContent += "<div class='link'><span class='copyLink' onclick='onClickCopy()' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' >" + pageUrl + "</a></div>";
                     }
-                    document.getElementById("content").innerHTML = parsedContent;
+                    setContent(parsedContent);
                 } else {
-                    document.getElementById("content").innerHTML = "Error processing file.";
+                    setContent("Error processing file.");
                 }
             }
         </script>
