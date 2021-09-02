@@ -34,6 +34,21 @@
                 margin-bottom: 20px;
                 max-width: 615px;
             }
+            textarea {
+                position: relative;
+                margin: 0 auto;
+                padding: 12px;
+                font-size: 12px;
+                border-radius: 4px;
+                border: none;
+                box-shadow: 1px 1px 1px 1px white;
+                font-family: 'Courier New', Courier, monospace;
+                width: calc(100% - 30px);
+                margin-bottom: 20px;
+                max-width: 800px;
+                height: 150px;
+                resize: none;
+            }
             button {
                 padding: 12px;
                 margin-left: 12px;
@@ -78,13 +93,14 @@
         <div class="container">
             <h2>Linkifier</h2>
             <div class="search">
-                <input id="url" name="url" value="" placeholder="Enter url" autocomplete="off" />
-                <button type="button" onclick="onClick()">Generate Links</button>
+                <textarea id="xmlText" value="" placeholder="Paste here"></textarea>
+                <!-- <input id="url" name="url" value="" placeholder="Enter url" autocomplete="off" /> -->
+                <button type="button" onclick="parseXMLText()">Generate Links</button>
             </div>
             <div id="content" />
         </div>
         <script type="text/javascript">
-            const urlRegex = /((?:(?:(?:http?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?)/i;
+            const urlRegex = /((?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?)/i;
             
             document.addEventListener('click', function(e) {
                 const targetElement = e.target;
@@ -98,11 +114,30 @@
                 }
             })
 
-            document.getElementById('url').addEventListener('keypress', function (e) {
+            document.getElementById('xmlText').addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     onClick();
                 }
             });
+
+            function parseXMLText() {
+                const xmlStr = document.getElementById('xmlText').value;
+                let parsedContent = "";
+                const splittedContent = xmlStr.split('</loc>');
+                if (splittedContent.length > 0) {
+                    splittedContent.forEach(function(str) {
+                        const pageUrl = str.split('<loc>')[1] || str.split('<loc>')[0];
+                        if (urlRegex.test(pageUrl) && pageUrl.indexOf('healthtap.com') !== -1) {
+                            parsedContent += "<div class='link'><span class='copyLink' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' >" + pageUrl + "</a></div>";
+                        }
+                    })
+                }
+                if (parsedContent) {
+                    setContent(parsedContent);
+                } else {
+                    setContent("No urls found.");
+                }
+            }
             
             function setContent(content) {
                 const contentElement = document.getElementById("content");
