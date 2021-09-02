@@ -75,9 +75,11 @@
         <script type="text/javascript">
             // const urlRegex = new RegExp("^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
             
-            document.addEventListener("click", copyToClipboard);
-            // function onClickCopy() {
-            // }
+            // document.addEventListener("click", copyToClipboard);
+            function onClickCopy(e) {
+                const str = e.target.getAttribute('data-url');
+                copyToClipboard(str);
+            }
 
             function onClick() {
                 const url = document.getElementById('url').value;
@@ -92,7 +94,6 @@
             }
 
             function copyToClipboard(e) {
-                const str = e.target.getAttribute('data-url');
                 const el = document.createElement('textarea');
                 el.value = str;
                 el.setAttribute('readonly', '');
@@ -123,7 +124,7 @@
                     x = xmlDoc.getElementsByTagName("loc");
                     for (i = 0; i < x.length; i++) {
                         const pageUrl = x[i].childNodes[0].nodeValue;
-                        parsedContent += "<div class='link'><span class='copyLink' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "<br>";
+                        parsedContent += "<div class='link'><span class='copyLink' onclick='onClickCopy()' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "<br>";
                     }
                     document.getElementById("content").innerHTML = parsedContent;
                 }
