@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" type="image/png" href="/images/favicon.ico"/>
         <style>
             body {
                 font-family:'Courier New', Courier, monospace;
@@ -66,7 +67,7 @@
         </style>
     </head>
     <body>
-        <h2>Sitemap linkifier</h2>
+        <h2>Linkifier</h2>
         <div class="search">
             <input id="url" name="url" value="" placeholder="Enter url" />
             <button type="button" onclick="onClick()">Generate Links</button>
@@ -127,8 +128,9 @@
                         parsedContent += "<div class='link'><span class='copyLink' onclick='onClickCopy()' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "<br>";
                     }
                     document.getElementById("content").innerHTML = parsedContent;
+                } else {
+                    document.getElementById("content").innerHTML = "Error processing file.";
                 }
-                document.getElementById("content").innerHTML = "Error processing file.";
             }
         </script>
     </body>
