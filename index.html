@@ -74,7 +74,11 @@
         <div id="content" />
         <script type="text/javascript">
             // const urlRegex = new RegExp("^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$");
-            document.getElementsByClassName("copyLink").addEventListener("click", copyToClipboard);
+            
+            document.addEventListener("click", copyToClipboard);
+            // function onClickCopy() {
+            // }
+
             function onClick() {
                 const url = document.getElementById('url').value;
                 document.getElementById("content").innerHTML = "Processing...";
