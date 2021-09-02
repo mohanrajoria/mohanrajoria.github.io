@@ -125,7 +125,7 @@
                     x = xmlDoc.getElementsByTagName("loc");
                     for (i = 0; i < x.length; i++) {
                         const pageUrl = x[i].childNodes[0].nodeValue;
-                        parsedContent += "<div class='link'><span class='copyLink' onclick='onClickCopy()' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "<br>";
+                        parsedContent += "<div class='link'><span class='copyLink' onclick='onClickCopy()' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' "  + "</a>" + pageUrl + "</div><br>";
                     }
                     document.getElementById("content").innerHTML = parsedContent;
                 } else {
