@@ -93,11 +93,11 @@
         <div class="container">
             <h2>Linkifier</h2>
             <div class="search">
-                <div><span>Total count</span> : <span className="count"></span></div>
                 <textarea id="xmlText" value="" placeholder="Paste here"></textarea>
                 <!-- <input id="url" name="url" value="" placeholder="Enter url" autocomplete="off" /> -->
                 <button type="button" onclick="parseXMLText()">Get Links</button>
             </div>
+            <div><span>Total count</span> : <span id="count"></span></div>
             <div id="content" />
         </div>
         <script type="text/javascript">
@@ -144,7 +144,7 @@
             }
             
             function setCount(count) {
-                const contentElement = document.getElementsByClassName("count");
+                const contentElement = document.getElementById("count");
                 contentElement.innerHTML = count;
             }
             
