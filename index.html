@@ -93,6 +93,7 @@
         <div class="container">
             <h2>Linkifier</h2>
             <div class="search">
+                <div><span>Total count</span> : <span className="count"></span></div>
                 <textarea id="xmlText" value="" placeholder="Paste here"></textarea>
                 <!-- <input id="url" name="url" value="" placeholder="Enter url" autocomplete="off" /> -->
                 <button type="button" onclick="parseXMLText()">Get Links</button>
@@ -121,6 +122,7 @@
             });
 
             function parseXMLText() {
+                let count = 0;
                 const xmlStr = document.getElementById('xmlText').value;
                 let parsedContent = "";
                 const splittedContent = xmlStr.split('</loc>');
@@ -128,15 +130,22 @@
                     splittedContent.forEach(function(str) {
                         const pageUrl = str.split('<loc>')[1] || str.split('<loc>')[0];
                         if (urlRegex.test(pageUrl) && pageUrl.indexOf('healthtap.com') !== -1) {
+                            count += 1;
                             parsedContent += "<div class='link'><span class='copyLink' data-url='" + pageUrl + "'>&#128279;</span><a href='" + pageUrl + "' target='_blank' >" + pageUrl + "</a></div>";
                         }
                     })
                 }
                 if (parsedContent) {
                     setContent(parsedContent);
+                    
                 } else {
                     setContent("No urls found.");
                 }
+            }
+            
+            function setCount(count) {
+                const contentElement = document.getElementById("count");
+                contentElement.innerHTML = count;
             }
             
             function setContent(content) {
